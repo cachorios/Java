@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SerialLar:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SerialLar_jar</output-path>
+    <root id="archive" name="SerialLar.jar">
+      <element id="module-output" name="SerialLar" />
+    </root>
+  </artifact>
+</component>
