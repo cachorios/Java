@@ -37,6 +37,7 @@ public class Main extends JApplet {
     public static final int SEVERO = 2;
 
     private String estado;
+    private String okCallback;
 
     static JApplet getApplet() {
         return applet;
@@ -198,6 +199,12 @@ public class Main extends JApplet {
     }
 
 
+    public void ifEstadoRun(String fCallfunc){
+        okCallback = fCallfunc;
+
+        getEstado();
+    }
+
     private void printMsg(String msg, int tipo) {
         if (tipo == 0 || tipo == 2)
             System.out.println(msg);
@@ -218,7 +225,6 @@ public class Main extends JApplet {
     private class SerialPortReader implements SerialPortEventListener {
 
         public void serialEvent(SerialPortEvent event) {
-
 
             if (event.isRXCHAR() || event.isRXFLAG()) {//If data is available
                 if (event.getEventValue() >0) {
@@ -267,7 +273,6 @@ public class Main extends JApplet {
         try {
             String msg = "";
             int intEstado;
-
             if(  (estado != null && estado.length()>0 ) ){
                 estado = estado.trim();
                 printMsg("Estado " + estado, 0);
@@ -292,6 +297,12 @@ public class Main extends JApplet {
                 estado = null;
                 if(msg.length()>0){
                     this.printMsg(msg.substring(2) ,1);
+                }else{
+                    //aqui esta todo bien!!
+                    if(okCallback != null && okCallback.length()>0 ){
+                        call(okCallback, null);
+                        okCallback = null;
+                    }
                 }
 
             }else{
